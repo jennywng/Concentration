@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Grid } from "@material-ui/core";
 import MemoryCard from "./MemoryCard";
-// import { Eco, Favorite, Grade, FiberManualRecord, InsertEmoticon, Cloud } from "@material-ui/icons";
 
 import './App.css';
 
@@ -14,15 +13,6 @@ class GameBoard extends Component {
             visible: []
         }
     }
-
-    setVisible = (idx) => {
-        let copyVisible = this.state.visible.slice();
-        if (copyVisible.length < 2) {
-            copyVisible.push(idx);
-        }
-        this.setState({visible: copyVisible});
-    };
-
 
     /**
      * fisher yates in place array shuffle
@@ -39,6 +29,19 @@ class GameBoard extends Component {
         return arr;
     };
 
+    setVisible = (idx) => {
+        console.log("click");
+        let copyVisible = this.state.visible.slice();
+        if (copyVisible.length < 2) {
+            console.log("setting vis");
+            copyVisible.push(idx);
+            this.setState({visible: copyVisible});
+            // this.setState(state => ({
+            //     visible: state.visible.includes(idx) ? state.visible.filter(i => i !== idx) : [...state.visible, idx]
+            // }));
+        }
+    };
+
     componentDidMount() {
         let copyCards = this.state.cards.slice();
         this.shuffle(copyCards);
@@ -46,6 +49,8 @@ class GameBoard extends Component {
     }
 
     render() {
+        console.log("visible", this.state.visible);
+
         return(
             <div>
                 <Grid container spacing={3}>
@@ -53,18 +58,17 @@ class GameBoard extends Component {
                         return (
                             <Grid item key={idx} xs={3}>
                                 <MemoryCard
-                                    idx={item}
+                                    idx={idx}
+                                    item={item}
                                     // visible={true}
                                     visible={this.state.visible.includes(idx)}
-                                    // onClick={this.setVisible(idx)}
-                                    setVisible={this.setVisible(idx)}
+                                    // onClick={(idx) => this.setVisible(idx)}
+                                    setVisible={(idx) => this.setVisible(idx)}
                                 />
                             </Grid>
                         )
                     })}
-
                 </Grid>
-
             </div>
         );
     }

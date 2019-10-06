@@ -16,16 +16,15 @@ class MemoryCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            visible: false
         }
     }
 
     render() {
         return(
             <div>
-                <Card>
+                <Card onClick={() => this.props.setVisible(this.props.idx)}>
                     <CardContent>
-                        {this.props.visible ? (icons[this.props.idx]) : null}
+                        {this.props.visible ? (icons[this.props.item]) : null}
                     </CardContent>
                 </Card>
             </div>
