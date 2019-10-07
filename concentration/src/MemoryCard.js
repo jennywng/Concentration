@@ -22,7 +22,7 @@ class MemoryCard extends Component {
     render() {
         return(
             <div>
-                <Card onClick={() => this.props.setVisible(this.props.idx)}>
+                <Card onClick={() => this.props.setVisible(this.props.item, this.props.idx)}>
                     <CardContent>
                         {this.props.visible ? (icons[this.props.item]) : null}
                     </CardContent>
